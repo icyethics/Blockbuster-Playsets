@@ -3,15 +3,17 @@ if not Blockbuster then
     Blockbuster = {}
 end
 
-Blockbuster.Playsets = {}
-Blockbuster.Playsets.mod_dir = ''..SMODS.current_mod.path
+Blockbuster.Playset = {}
+Blockbuster.Playset.mod_dir = ''..SMODS.current_mod.path
 
-Blockbuster.Playsets_config = SMODS.current_mod.config
+Blockbuster.Playset_config = SMODS.current_mod.config
 
 -- Read in Atlases
 local atlases = 
 {
-    {'modicon', 32, 32, 'modicon.png'}
+    {'modicon', 32, 32, 'modicon.png'},
+    {"bbplayset_content_pack_frame", 71, 95, 'bbplayset_content_pack_frame.png'},
+    {"bbplayset_playset_frame", 71, 95, 'bbplayset_playset_frame.png'},
 }
 
 for _index, _object in ipairs(atlases) do
@@ -24,7 +26,7 @@ for _index, _object in ipairs(atlases) do
 end
 
 -- Read in Files
-function Blockbuster.Playsets.load_file(file_address)
+function Blockbuster.Playset.load_file(file_address)
     local helper, load_error = SMODS.load_file(file_address)
     if load_error then
         sendDebugMessage ("The error is: "..load_error)
@@ -40,9 +42,9 @@ local _list_of_folders = {
 }
 
 for _index, _folder in ipairs(_list_of_folders) do
-    local files = NFS.getDirectoryItems(Blockbuster.Playsets.mod_dir .. _folder)
+    local files = NFS.getDirectoryItems(Blockbuster.Playset.mod_dir .. _folder)
     for _, _filename in ipairs(files) do
-        Blockbuster.Playsets.load_file(_folder .. "/" .. _filename)
+        Blockbuster.Playset.load_file(_folder .. "/" .. _filename)
     end
 end
 
