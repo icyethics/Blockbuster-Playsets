@@ -16,8 +16,6 @@ Blockbuster.Playset.ContentPackage = SMODS.Center:extend {
     },
     set = 'ContentPackage',
     process_loc_text = function(self)
-        print("testing for ")
-        print(self.key)
         if not G.localization.descriptions.ContentPackage then
             G.localization.descriptions.ContentPackage = {}
         end
@@ -25,7 +23,11 @@ Blockbuster.Playset.ContentPackage = SMODS.Center:extend {
     end,
     name = 'None',
     types = {"Mechanical", "Aesthetic", "Balanced", "Broken", "Vanilla-Only", "Modded-Only"},
-    
+    set_card_type_badge = function(self, card, badges)
+        if not card.fake_card then
+            badges[#badges+1] = create_badge(localize('k_contentpackage'), HEX("ff992f"), G.C.WHITE, 1.2 )
+        end
+    end,
     -- Visuals
     displayImage = "j_joker",
     atlas = "Joker",
@@ -45,12 +47,6 @@ Blockbuster.Playset.ContentPackage = SMODS.Center:extend {
         'Joker'
     },
     register = function(self)
-        -- self.dependencies = self.dependencies or {}
-        -- for _index, _modID in ipairs(self.mods) do
-        --     if _modID ~= "vanilla" and _modID ~= "Vanilla" then
-        --         self.dependencies[#self.dependencies + 1] = _modID
-        --     end
-        -- end
         if self.registered then
             sendWarnMessage(('Detected duplicate register call on Blockbuster.Playset.ContentPackage %s'):format(self.key:lower()), self.set)
             return
@@ -117,8 +113,8 @@ SMODS.DrawStep {
     key = "bbplayset_contentPackage_layer",
     order = 51,
     func = function(card, layer)
+        -- if card and card.config.center == G.P_CENTERS.m_kino_superhero then
         if card and card.config and card.config.center and card.config.center.set == "ContentPackage" then
-            -- print(G.ASSET_ATLAS)
             contentPackage = contentPackage or Sprite(card.T.x, card.T.y, card.T.w, card.T.h, G.ASSET_ATLAS["bbplayset_content_pack_frame"], {x = 0, y = 0})
             contentPackage.role.draw_major = card
 
@@ -144,15 +140,15 @@ SMODS.DrawStep {
                     
             --     end
 
-            --     -- if _state == "Ban" then
-            --     --     inclusionSpriteBad = inclusionSpriteBad or Sprite(0,0,0.5,0.5, G.ASSET_ATLAS["kino_ui"], {x=1, y=1})
-            --     --     inclusionSpriteBad.role.draw_major = card
-            --     --     inclusionSpriteBad:draw_shader('dissolve', nil, nil, nil, card.children.center, nil, nil, nil, nil)
-            --     -- elseif _state == "Include" then
-            --     --     inclusionSpriteGood = inclusionSpriteGood or Sprite(0,0,0.5,0.5, G.ASSET_ATLAS["kino_ui"], {x=2, y=1})
-            --     --     inclusionSpriteGood.role.draw_major = card
-            --     --     inclusionSpriteGood:draw_shader('dissolve', nil, nil, nil, card.children.center, nil, nil, nil, nil)
-            --     -- end
+            --     if _state == "Ban" then
+            --         inclusionSpriteBad = inclusionSpriteBad or Sprite(0,0,0.5,0.5, G.ASSET_ATLAS["kino_ui"], {x=1, y=1})
+            --         inclusionSpriteBad.role.draw_major = card
+            --         inclusionSpriteBad:draw_shader('dissolve', nil, nil, nil, card.children.center, nil, nil, nil, nil)
+            --     elseif _state == "Include" then
+            --         inclusionSpriteGood = inclusionSpriteGood or Sprite(0,0,0.5,0.5, G.ASSET_ATLAS["kino_ui"], {x=2, y=1})
+            --         inclusionSpriteGood.role.draw_major = card
+            --         inclusionSpriteGood:draw_shader('dissolve', nil, nil, nil, card.children.center, nil, nil, nil, nil)
+            --     end
             -- end
         end
     end,

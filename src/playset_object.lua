@@ -29,6 +29,11 @@ Blockbuster.Playset.Playset = SMODS.Center:extend {
     mods = {
         "vanilla"
     },
+    set_card_type_badge = function(self, card, badges)
+        if not card.fake_card then
+            badges[#badges+1] = create_badge(localize('k_playset'), HEX("a445db"), G.C.WHITE, 1.2 )
+        end
+    end,
     order = 0,
     config = {
 
@@ -45,12 +50,6 @@ Blockbuster.Playset.Playset = SMODS.Center:extend {
     },
     displayImage = "j_joker",
     register = function(self)
-        self.dependencies = self.dependencies or {}
-        for _index, _modID in ipairs(self.mods) do
-            if _modID ~= "vanilla" then
-                self.dependencies[#self.dependencies + 1] = _modID
-            end
-        end
         if self.registered then
             sendWarnMessage(('Detected duplicate register call on Blockbuster.Playset.Playset %s'):format(self.key:lower()), self.set)
             return
@@ -85,8 +84,7 @@ Blockbuster.Playset.Playset = SMODS.Center:extend {
     inject = function(self)
     end,
     get_name = function(self)
-        print(self.key)
-        print(G.localization.descriptions.Playset[self.key])
+        -- print(G.localization.descriptions.Playset[self.key])
         return G.localization.descriptions.Playset[self.key].name
     end
 }
@@ -97,6 +95,7 @@ SMODS.DrawStep {
     key = "bbplayset_playset_layer",
     order = 51,
     func = function(card, layer)
+        -- if card and card.config.center == G.P_CENTERS.m_kino_superhero then
         if card and card.config and card.config.center and card.config.center.set == "Playset" then
             playset_Frame = playset_Frame or Sprite(card.T.x, card.T.y, card.T.w, card.T.h, G.ASSET_ATLAS["bbplayset_playset_frame"], {x = 0, y = 0})
             playset_Frame.role.draw_major = card

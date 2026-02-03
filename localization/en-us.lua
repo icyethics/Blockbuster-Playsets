@@ -169,13 +169,22 @@ return {
                     "All content currently",
                     "installed"
                 }
+            },
+            vanilla_basic = {
+                name = "All content",
+                text = {
+                    "All content currently",
+                    "installed"
+                }
             }
             
         }
     },
     misc = {
         dictionary = {
-           kino_select_playset = "Playset",
+            k_playset = "Playset",
+            k_contentpackage = "Content Pack",
+            kino_select_playset = "Playset",
         }
     }
 }

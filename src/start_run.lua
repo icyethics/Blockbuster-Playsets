@@ -6,6 +6,7 @@ function Game:start_run(args)
     Blockbuster.Playset.startup.choices.playset then
         args.playset = Blockbuster.Playset.startup.choices.playset
     end
+    -- args.playset = Blockbuster.Playset.Playsets["kino_science_pack"]
 
     if args.playset then
 
@@ -28,7 +29,10 @@ function Game:start_run(args)
             end
         end
 
+        print("-----")
         for _package_key, _bool in pairs(_playset.packages) do
+            print(_package_key)
+            print(_bool)
             local _content_package = Blockbuster.Playset.ContentPackages[_package_key]
             if _content_package ~= nil then
             else

@@ -141,9 +141,11 @@ function Blockbuster.Playset.generate_base_playsets()
                         _modID
                     }
                 }
+
             end
         end
     end
+    init_localization()
 end
 
 function Blockbuster.Playset.register_new_Blockbuster(key, prefix, set, is_consumable)
