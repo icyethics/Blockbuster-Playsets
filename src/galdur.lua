@@ -26,7 +26,7 @@ function Blockbuster.kino_galdur_select_playset()
     end
 
     Blockbuster.Playset.startup.choices = {
-        playset = Blockbuster.Playset.Playsets["kino_standardsize_movies"]
+        playset = Blockbuster.Playset.Playsets["vanilla_basic"]
     }
     
 
