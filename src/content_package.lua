@@ -119,37 +119,37 @@ SMODS.DrawStep {
             contentPackage.role.draw_major = card
 
             contentPackage:draw_shader('dissolve', nil, nil, nil, card.children.center, nil, nil, nil, nil)
-            -- if (Blockbuster.Playset and 
-            -- Blockbuster.Playset.startup and 
-            -- Blockbuster.Playset.startup.contentPackages and
-            -- Blockbuster.Playset.startup.contentPackages[card.config.center.key])
-            -- or (Blockbuster.Playset and 
-            -- Blockbuster.Playset.startup and 
-            -- Blockbuster.Playset.startup.choices and
-            -- Blockbuster.Playset.startup.choices.playset) then
+            if (Blockbuster.Playset and 
+            Blockbuster.Playset.startup and 
+            Blockbuster.Playset.startup.contentPackages and
+            Blockbuster.Playset.startup.contentPackages[card.config.center.key])
+            or (Blockbuster.Playset and 
+            Blockbuster.Playset.startup and 
+            Blockbuster.Playset.startup.choices and
+            Blockbuster.Playset.startup.choices.playset) then
 
-            --     local _state = nil
-            --     if Blockbuster.Playset.startup.contentPackages and Blockbuster.Playset.startup.contentPackages[card.config.center.key] == "Ban" then
-            --         _state = "Ban"
-            --     elseif Blockbuster.Playset.startup.contentPackages and Blockbuster.Playset.startup.contentPackages[card.config.center.key] == "Include" then
-            --         _state = "Include"
-            --     elseif Blockbuster.Playset.startup.choices.playset.packages[card.config.center.key] == true then
-            --         _state = "Include"
-            --     elseif Blockbuster.Playset.startup.choices.playset.packages[card.config.center.key] == false then
-            --         _state = "Ban"
+                local _state = nil
+                if Blockbuster.Playset.startup.contentPackages and Blockbuster.Playset.startup.contentPackages[card.config.center.key] == "Ban" then
+                    _state = "Ban"
+                elseif Blockbuster.Playset.startup.contentPackages and Blockbuster.Playset.startup.contentPackages[card.config.center.key] == "Include" then
+                    _state = "Include"
+                elseif Blockbuster.Playset.startup.choices.playset.packages[card.config.center.key] == true then
+                    _state = "Include"
+                elseif Blockbuster.Playset.startup.choices.playset.packages[card.config.center.key] == false then
+                    _state = "Ban"
                     
-            --     end
+                end
 
-            --     if _state == "Ban" then
-            --         inclusionSpriteBad = inclusionSpriteBad or Sprite(0,0,0.5,0.5, G.ASSET_ATLAS["kino_ui"], {x=1, y=1})
-            --         inclusionSpriteBad.role.draw_major = card
-            --         inclusionSpriteBad:draw_shader('dissolve', nil, nil, nil, card.children.center, nil, nil, nil, nil)
-            --     elseif _state == "Include" then
-            --         inclusionSpriteGood = inclusionSpriteGood or Sprite(0,0,0.5,0.5, G.ASSET_ATLAS["kino_ui"], {x=2, y=1})
-            --         inclusionSpriteGood.role.draw_major = card
-            --         inclusionSpriteGood:draw_shader('dissolve', nil, nil, nil, card.children.center, nil, nil, nil, nil)
-            --     end
-            -- end
+                if _state == "Ban" then
+                    inclusionSpriteBad = inclusionSpriteBad or Sprite(card.T.x, card.T.y, card.T.w, card.T.h, G.ASSET_ATLAS["bbplayset_ui_assets"], {x=1, y=0})
+                    inclusionSpriteBad.role.draw_major = card
+                    inclusionSpriteBad:draw_shader('dissolve', nil, nil, nil, card.children.center, nil, nil, nil, nil)
+                elseif _state == "Include" then
+                    inclusionSpriteGood = inclusionSpriteGood or Sprite(card.T.x, card.T.y, card.T.w, card.T.h, G.ASSET_ATLAS["bbplayset_ui_assets"], {x=2, y=0})
+                    inclusionSpriteGood.role.draw_major = card
+                    inclusionSpriteGood:draw_shader('dissolve', nil, nil, nil, card.children.center, nil, nil, nil, nil)
+                end
+            end
         end
     end,
     conditions = {vortex = false, facing = 'front'}

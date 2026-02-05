@@ -14,6 +14,7 @@ local atlases =
     {'modicon', 32, 32, 'modicon.png'},
     {"bbplayset_content_pack_frame", 71, 95, 'bbplayset_content_pack_frame.png'},
     {"bbplayset_playset_frame", 71, 95, 'bbplayset_playset_frame.png'},
+    {"bbplayset_ui_assets", 71, 95, "ui_assets_cardsized.png"}
 }
 
 for _index, _object in ipairs(atlases) do
